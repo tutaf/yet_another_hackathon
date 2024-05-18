@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import android.template.data.MyModelRepository
+import android.template.data.Repository
 import android.template.ui.feed.FeedUiState.Error
 import android.template.ui.feed.FeedUiState.Loading
 import android.template.ui.feed.FeedUiState.Success
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FeedViewModel @Inject constructor(
-        private val repo: MyModelRepository
+        private val repo: Repository
 ) : ViewModel() {
 
     val uiState: StateFlow<FeedUiState> = repo
@@ -27,7 +27,7 @@ class FeedViewModel @Inject constructor(
 
     fun addMyModel(name: String) {
         viewModelScope.launch {
-            repo.add(name)
+            repo.get(name)
         }
     }
 }

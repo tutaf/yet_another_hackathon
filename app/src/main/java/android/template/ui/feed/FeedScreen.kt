@@ -22,6 +22,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
+const val FeedScreenRouteDefinition = "feed"
+
+
 @Composable
 fun FeedScreen(modifier: Modifier = Modifier, viewModel: FeedViewModel = hiltViewModel()) {
     val items by viewModel.uiState.collectAsStateWithLifecycle()

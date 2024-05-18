@@ -16,6 +16,10 @@ hilt = "2.51.1"
 junit = "4.13.2"
 kotlin = "1.9.24"
 ksp = "1.9.24-1.0.20"
+retrofit = "2.9.0"
+moshi = "1.15.0"
+okHttpLoggingInterceptor = "4.11.0"
+
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidxCore" }
@@ -46,6 +50,15 @@ hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hil
 hilt-gradle-plugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
+# Retrofit
+retrofit-core = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-moshiConverter = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+retrofit-loggingInterceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okHttpLoggingInterceptor" }
+# Moshi - Json converter
+moshi-core = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshi" }
+moshi-annotationProcessor = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

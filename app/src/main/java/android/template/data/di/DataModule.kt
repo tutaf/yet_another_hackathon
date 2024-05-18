@@ -7,7 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import android.template.data.MyModelRepository
+import android.template.data.Repository
 import android.template.data.DefaultMyModelRepository
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -19,13 +19,13 @@ interface DataModule {
     @Binds
     fun bindsMyModelRepository(
         myModelRepository: DefaultMyModelRepository
-    ): MyModelRepository
+    ): Repository
 }
 
-class FakeMyModelRepository @Inject constructor() : MyModelRepository {
+class FakeMyModelRepository @Inject constructor() : Repository {
     override val myModels: Flow<List<String>> = flowOf(fakeMyModels)
 
-    override suspend fun add(name: String) {
+    override suspend fun get(name: String) {
         throw NotImplementedError()
     }
 }
