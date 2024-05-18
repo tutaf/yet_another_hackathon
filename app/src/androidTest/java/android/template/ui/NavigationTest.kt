@@ -22,7 +22,7 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.Rule
 import org.junit.Test
-import android.template.data.di.fakeMyModels
+import android.template.data.erasmulApi.di.fakeMyModels
 
 @HiltAndroidTest
 class NavigationTest {

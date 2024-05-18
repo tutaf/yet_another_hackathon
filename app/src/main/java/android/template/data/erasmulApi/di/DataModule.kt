@@ -1,5 +1,5 @@
 
-package android.template.data.di
+package android.template.data.erasmulApi.di
 
 import dagger.Binds
 import dagger.Module
@@ -18,7 +18,7 @@ interface DataModule {
     @Singleton
     @Binds
     fun bindsMyModelRepository(
-        myModelRepository: DefaultMyModelRepository
+        repo: DefaultMyModelRepository
     ): Repository
 }
 

@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import android.template.data.Repository
+import android.template.data.models.ApiOpportunity
 import android.template.ui.feed.FeedUiState.Error
 import android.template.ui.feed.FeedUiState.Loading
 import android.template.ui.feed.FeedUiState.Success
@@ -36,7 +37,7 @@ sealed interface FeedUiState {
     object Loading : FeedUiState
     data class Error(val throwable: Throwable) : FeedUiState
     data class Success(val data: List<String>) : FeedUiState
-    data class Oportunities(val data: List<String>) : FeedUiState
+    data class Oportunities(val data: List<ApiOpportunity>) : FeedUiState
 
 
 
