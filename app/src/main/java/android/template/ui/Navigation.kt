@@ -16,6 +16,7 @@
 
 package android.template.ui
 
+import android.template.ui.main.MainScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,13 +25,18 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import android.template.ui.mymodel.MyModelScreen
+import android.template.ui.onboarding.OnboardingScreen
+import android.template.ui.onboarding.OnboardingViewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
-fun MainNavigation() {
+fun MainNavigation(viewModel: OnboardingViewModel = hiltViewModel()) {
     val navController = rememberNavController()
+    val startDestination = if (viewModel.isFirstLaunch) "onboarding" else "main"
 
-    NavHost(navController = navController, startDestination = "main") {
-        composable("main") { MyModelScreen(modifier = Modifier.padding(16.dp)) }
+    NavHost(navController = navController, startDestination = startDestination) {
+        composable("onboarding") { OnboardingScreen(navController = navController) }
+        composable("main") { MainScreen() }
         // TODO: Add more destinations
     }
 }
