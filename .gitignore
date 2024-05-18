@@ -15,8 +15,3 @@
 .cxx
 local.properties
 
-# Project exclude paths
-/.github/
-/.google/
-/app/
-/gradle/
