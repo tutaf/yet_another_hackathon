@@ -1,5 +1,5 @@
 
-package android.template.ui.mymodel
+package android.template.ui.feed
 
 import android.template.ui.theme.MyApplicationTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -23,21 +23,22 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
-fun MyModelScreen(modifier: Modifier = Modifier, viewModel: MyModelViewModel = hiltViewModel()) {
+fun FeedScreen(modifier: Modifier = Modifier, viewModel: FeedViewModel = hiltViewModel()) {
     val items by viewModel.uiState.collectAsStateWithLifecycle()
-    if (items is MyModelUiState.Success) {
-        MyModelScreen(
-            items = (items as MyModelUiState.Success).data,
-            onSave = viewModel::addMyModel,
+    if (items is FeedUiState.Success) {
+        FeedScreen(
+            items = (items as FeedUiState.Success).data,
+            onClick = viewModel::addMyModel,
             modifier = modifier
         )
     }
 }
 
+
 @Composable
-internal fun MyModelScreen(
+internal fun FeedScreen(
     items: List<String>,
-    onSave: (name: String) -> Unit,
+    onClick: (name: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
@@ -51,31 +52,22 @@ internal fun MyModelScreen(
                 onValueChange = { nameMyModel = it }
             )
 
-            Button(modifier = Modifier.width(96.dp), onClick = { onSave(nameMyModel) }) {
+            Button(modifier = Modifier.width(96.dp), onClick = { onClick(nameMyModel) }) {
                 Text("Save")
             }
         }
-
         items.forEach {
             Text("Saved item: $it")
         }
     }
 }
 
-// Previews
 
 @Preview(showBackground = true)
 @Composable
 private fun DefaultPreview() {
     MyApplicationTheme {
-        MyModelScreen(listOf("Compose", "Room", "Kotlin"), onSave = {})
+        FeedScreen(listOf("Compose", "Room", "Kotlin"), onClick = {})
     }
 }
 
-@Preview(showBackground = true, widthDp = 480)
-@Composable
-private fun PortraitPreview() {
-    MyApplicationTheme {
-        MyModelScreen(listOf("Compose", "Room", "Kotlin"), onSave = {})
-    }
-}
