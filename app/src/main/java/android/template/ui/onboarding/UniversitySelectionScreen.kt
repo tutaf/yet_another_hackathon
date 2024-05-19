@@ -11,32 +11,35 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.text.TextStyle
 
 @Composable
 fun UniversitySelectionScreen(viewModel: OnboardingViewModel = hiltViewModel()) {
     val universities = listOf("USM", "UTM", "ASEM")
     val selectedUniversity by viewModel.selectedUniversity.collectAsState()
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text(text = "Select your University")
-        Spacer(modifier = Modifier.height(20.dp))
+    Row(horizontalArrangement = Arrangement.Center) {
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.Start
+        ) {
+            Text(text = "Select your University")
+            Spacer(modifier = Modifier.height(20.dp))
 
-        universities.forEach { university ->
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                RadioButton(
-                    selected = university == selectedUniversity,
-                    onClick = { viewModel.setUniversity(university) }
-                )
-                Spacer(modifier = Modifier.width(8.dp))
-                Text(text = university)
+            universities.forEach { university ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    RadioButton(
+                        selected = university == selectedUniversity,
+                        onClick = { viewModel.setUniversity(university) }
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(text = university)
+                }
+                Spacer(modifier = Modifier.height(8.dp))
             }
-            Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }
