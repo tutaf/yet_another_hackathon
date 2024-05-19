@@ -133,4 +133,18 @@ dependencies {
     implementation(libs.androidx.foundation)
     implementation(libs.accompanist.pager.indicators)
 
+
+
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.retrofit)
+    implementation(libs.converter.moshi)
+    implementation(libs.moshi.core)
+    implementation(libs.moshi.kotlin)
+    ksp (libs.moshi.kotlin.codegen)
+
+    implementation(libs.androidx.runtime.livedata)
+
+
+
 }
