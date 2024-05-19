@@ -21,7 +21,7 @@ import dagger.Module
 import dagger.hilt.components.SingletonComponent
 import dagger.hilt.testing.TestInstallIn
 import android.template.data.Repository
-import android.template.data.erasmulApi.di.DataModule
+import android.template.data.erasmulApi.DataModule
 import android.template.data.erasmulApi.di.FakeMyModelRepository
 
 @Module

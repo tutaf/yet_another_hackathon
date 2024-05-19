@@ -1,7 +1,7 @@
 package android.template.data.erasmulApi.database
 
-import android.template.data.models.ApiOpportunities
-import android.template.data.models.ApiOpportunity
+import android.template.data.erasmulApi.models.ApiOpportunities
+import android.template.data.erasmulApi.models.ApiOpportunity
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

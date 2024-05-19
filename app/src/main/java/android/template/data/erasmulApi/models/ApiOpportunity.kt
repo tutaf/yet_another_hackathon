@@ -1,4 +1,4 @@
-package android.template.data.models
+package android.template.data.erasmulApi.models
 
 
 import com.squareup.moshi.Json
