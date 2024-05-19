@@ -16,6 +16,7 @@
 
 package android.template.ui
 
+import OpportunityApp
 import android.template.ui.main.MainScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -35,7 +36,7 @@ fun MainNavigation(viewModel: OnboardingViewModel = hiltViewModel()) {
 
     NavHost(navController = navController, startDestination = startDestination) {
         composable("onboarding") { OnboardingScreen(navController = navController) }
-        composable("main") { MainScreen() }
+        composable("main") { OpportunityApp() }
         // TODO: Add more destinations
     }
 }

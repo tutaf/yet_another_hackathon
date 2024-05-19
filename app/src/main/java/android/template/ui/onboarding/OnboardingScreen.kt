@@ -1,5 +1,7 @@
 package android.template.ui.onboarding
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -56,24 +58,41 @@ fun OnboardingScreen(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            if (pagerState.currentPage > 0) {
-                Button(onClick = {
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(pagerState.currentPage - 1)
+            Row(
+                modifier = Modifier.fillMaxWidth(0.5F),
+                horizontalArrangement = Arrangement.Start) {
+                Spacer(modifier = Modifier.width(12.dp).height(24.dp))
+                AnimatedVisibility(visible = pagerState.currentPage > 0) {
+                    Button(
+                        onClick = {
+                            coroutineScope.launch {
+                                pagerState.animateScrollToPage(pagerState.currentPage - 1)
+                            }
+                        }) {
+                        Text(text = "Previous")
                     }
-                }) {
-                    Text(text = "Previous")
                 }
+                Spacer(modifier = Modifier.width(12.dp).height(24.dp))
             }
-            if (pagerState.currentPage < 2) {
-                Button(onClick = {
-                    coroutineScope.launch {
-                        pagerState.animateScrollToPage(pagerState.currentPage + 1)
+            Row(
+                modifier = Modifier.fillMaxWidth(0.5F),
+                horizontalArrangement = Arrangement.End) {
+                Spacer(modifier = Modifier.width(12.dp).height(24.dp))
+
+                AnimatedVisibility(visible = pagerState.currentPage < 2) {
+                    Button(
+                        onClick = {
+                            coroutineScope.launch {
+                                pagerState.animateScrollToPage(pagerState.currentPage + 1)
+                            }
+                        }) {
+                        Text(text = "Next")
                     }
-                }) {
-                    Text(text = "Next")
                 }
+                Spacer(modifier = Modifier.width(12.dp).height(24.dp))
+
             }
         }
+
     }
 }
