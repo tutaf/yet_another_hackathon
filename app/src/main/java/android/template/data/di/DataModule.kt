@@ -1,33 +1,26 @@
-
 package android.template.data.di
 
-import dagger.Binds
+
+import android.template.data.SharedPreferencesManager
+import android.content.Context
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
-import android.template.data.MyModelRepository
-import android.template.data.DefaultMyModelRepository
-import javax.inject.Inject
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Singleton
+
+
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface DataModule {
+object SharedPreferencesModule {
+
+    @Provides
     @Singleton
-    @Binds
-    fun bindsMyModelRepository(
-        myModelRepository: DefaultMyModelRepository
-    ): MyModelRepository
-}
-
-class FakeMyModelRepository @Inject constructor() : MyModelRepository {
-    override val myModels: Flow<List<String>> = flowOf(fakeMyModels)
-
-    override suspend fun add(name: String) {
-        throw NotImplementedError()
+    fun provideSharedPreferencesManager(
+        @ApplicationContext context: Context
+    ): SharedPreferencesManager {
+        return SharedPreferencesManager(context)
     }
 }
-
-val fakeMyModels = listOf("One", "Two", "Three")

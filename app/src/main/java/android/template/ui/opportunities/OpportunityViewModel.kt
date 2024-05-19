@@ -1,4 +1,4 @@
-package android.template.ui.feed
+package android.template.ui.opportunities
 
 import android.template.data.OpportunityRepository
 import android.template.data.models.ApiOpportunity
@@ -8,14 +8,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FeedViewModel @Inject constructor(private val repository: OpportunityRepository) : ViewModel() {
+class OpportunityViewModel @Inject constructor(private val repository: OpportunityRepository) : ViewModel() {
 
     private val _opportunities = MutableLiveData<List<ApiOpportunity>>()
     val opportunities: LiveData<List<ApiOpportunity>> get() = _opportunities
-
-    init {
-        fetchOpportunities()
-    }
 
     fun fetchOpportunities() {
         viewModelScope.launch {
