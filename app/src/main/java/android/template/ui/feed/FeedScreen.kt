@@ -1,6 +1,7 @@
 
 package android.template.ui.feed
 
+import android.template.data.models.ApiOpportunity
 import android.template.ui.theme.MyApplicationTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,26 +29,30 @@ const val FeedScreenRouteDefinition = "feed"
 @Composable
 fun FeedScreen(modifier: Modifier = Modifier, viewModel: FeedViewModel = hiltViewModel()) {
     val items by viewModel.uiState.collectAsStateWithLifecycle()
+    val opportunities by viewModel.opportunitiesUiState.collectAsStateWithLifecycle()
     if (items is FeedUiState.Success) {
         FeedScreen(
-            items = (items as FeedUiState.Success).data,
+            items = opportunities,
             onClick = viewModel::addMyModel,
             modifier = modifier
         )
     }
+
 }
 
 
 @Composable
 internal fun FeedScreen(
-    items: List<String>,
+    items: List<ApiOpportunity>,
     onClick: (name: String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
         var nameMyModel by remember { mutableStateOf("Compose") }
         Row(
-            modifier = Modifier.fillMaxWidth().padding(bottom = 24.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 24.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             TextField(
@@ -70,7 +75,7 @@ internal fun FeedScreen(
 @Composable
 private fun DefaultPreview() {
     MyApplicationTheme {
-        FeedScreen(listOf("Compose", "Room", "Kotlin"), onClick = {})
+        FeedScreen(emptyList(), onClick = {})
     }
 }
 

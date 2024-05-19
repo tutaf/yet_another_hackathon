@@ -1,5 +1,6 @@
 package android.template.data.erasmulApi.database
 
+import android.template.data.models.ApiOpportunities
 import android.template.data.models.ApiOpportunity
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -18,7 +19,7 @@ val erasmusApiDB = retrofit.create(TheErasmusApiDB::class.java)
 
 interface TheErasmusApiDB {
     @GET("retrieve")
-    suspend fun getOpportunities(): Response<List<ApiOpportunity>>
+    suspend fun getOpportunities(): Response<ApiOpportunities>
 
     @POST("add")
     suspend fun addOpportunity(

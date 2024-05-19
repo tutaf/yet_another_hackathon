@@ -9,16 +9,17 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import android.template.data.Repository
+import android.template.data.RepositoryImpl
 import android.template.data.models.ApiOpportunity
 import android.template.ui.feed.FeedUiState.Error
 import android.template.ui.feed.FeedUiState.Loading
 import android.template.ui.feed.FeedUiState.Success
+import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
 class FeedViewModel @Inject constructor(
-        private val repo: Repository
+        private val repo: RepositoryImpl
 ) : ViewModel() {
 
     val uiState: StateFlow<FeedUiState> = repo
@@ -29,6 +30,22 @@ class FeedViewModel @Inject constructor(
     fun addMyModel(name: String) {
         viewModelScope.launch {
             repo.get(name)
+
+        }
+    }
+
+    private val _opportunitiesUiState : MutableStateFlow<List<ApiOpportunity>> =  MutableStateFlow(emptyList())
+    val opportunitiesUiState: StateFlow<List<ApiOpportunity>> = _opportunitiesUiState
+
+    init {
+        fetchOpportunities()
+    }
+
+    private fun fetchOpportunities() {
+        viewModelScope.launch {
+            val opportunities = repo.getOpportunities()
+            _opportunitiesUiState.value = opportunities
+
         }
     }
 }
