@@ -1,6 +1,7 @@
 
 package android.template.ui.feed
 
+import android.template.MyApplication
 import android.template.R
 import android.template.data.models.ApiOpportunity
 import android.template.ui.opportunities.OpportunityViewModel
@@ -21,6 +22,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Chip
+import androidx.compose.material.ChipDefaults
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Search
@@ -31,6 +35,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -52,11 +57,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-
-
-//import coil.compose.AsyncImage
-
-
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 const val FeedScreenRouteDefinition = "feed"
 
@@ -130,9 +132,9 @@ fun SearchBar(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Surface(
-            color = Color.LightGray, // Adjust the background color as needed
-            modifier = Modifier.weight(5f),
-            shape = RoundedCornerShape(16.dp), // Adjust the corner radius as needed
+            color = MaterialTheme.colorScheme.onPrimaryContainer, // Adjust the background color as needed
+            modifier = Modifier.weight(6f),
+            shape = RoundedCornerShape(12.dp), // Adjust the corner radius as needed
 
         ) {
             TextField(
@@ -154,14 +156,14 @@ fun SearchBar(
                     .padding(horizontal = 8.dp)
                     .weight(1f)
             ) {
-                Icon(Icons.Default.Search, contentDescription = "Search")
+                //Icon(Icons.Default.Search, contentDescription = "Search")
             }
         }
         Spacer(modifier = Modifier.width(8.dp))
 
 
         Surface(
-            color = Color.LightGray,
+            color = MaterialTheme.colorScheme.surface,
             modifier = Modifier.weight(1f),
             shape = RoundedCornerShape(16.dp)
 
@@ -205,43 +207,55 @@ fun Element(opp: ApiOpportunity){
             fontWeight = FontWeight.Bold
         )
         Text(text = opp.content)
-        Row(
+//        Row(
+//            modifier = Modifier.fillMaxWidth(),
+//            horizontalArrangement = Arrangement.SpaceBetween,
+//            verticalAlignment = Alignment.CenterVertically
+        Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
         ) {
+            OpportunityDetails(opp = opp)
             OpportunityTags(opp = opp)
 
-            Spacer(modifier = Modifier.width(8.dp)) // Add space between the tags and details
+            //Spacer(modifier = Modifier.width(8.dp)) // Add space between the tags and details
 
-            OpportunityDetails(opp = opp)
         }
 
     }
 }
 
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun OpportunityTags(opp: ApiOpportunity) {
     val buttonStyle = Modifier.padding(horizontal = 2.dp) // Adjust padding for button
 
     val items = listOf(
         opp.degree,
-        opp.category
+        opp.category,
+        ""+opp.duration+ " months"
     )
-
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(8.dp) // Add space of 8.dp between elements
     ) {
         items(items) { item ->
-            OutlinedButton(onClick = { }, modifier = buttonStyle) {
-                Text(
-                    text = item,
-                    fontSize = 12.sp
-                )
-            }
+//            OutlinedButton(onClick = { }, modifier = buttonStyle) {
+//                Text(
+//                    text = item,
+//                    fontSize = 12.sp
+//                )
+//            }
+            SuggestionChip(onClick = { }, label = { Text(item) })
+
         }
     }
+}
+
+fun formatDeadline(deadline: String): String {
+    val inputFormat = SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss z", Locale.ENGLISH)
+    val outputFormat = SimpleDateFormat("dd MMM", Locale.ENGLISH)
+    val date = inputFormat.parse(deadline)
+    return if (date != null) outputFormat.format(date) else deadline
 }
 
 @Composable
@@ -249,19 +263,25 @@ fun OpportunityDetails(opp: ApiOpportunity) {
     val textStyle = TextStyle(color = Color.Gray) // Define a common text style
 
     val details = listOf(
-        "${opp.duration} days",
-        "|",
-        opp.deadline
-    )
+        //"Duration: ${opp.duration} days",
+        //"| Application deadline: ",
+        "Application deadline: ",
+        formatDeadline(opp.deadline)
 
-    LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(8.dp) // Add space of 8.dp between elements
-    ) {
-        items(details) { detail ->
-            Text(
-                text = detail,
-                style = textStyle // Apply the text style
-            )
+
+    )
+    Column {
+        Spacer(modifier = Modifier.height(4.dp))
+
+        LazyRow(
+            horizontalArrangement = Arrangement.spacedBy(8.dp) // Add space of 8.dp between elements
+        ) {
+            items(details) { detail ->
+                Text(
+                    text = detail,
+                    style = textStyle // Apply the text style
+                )
+            }
         }
     }
 }
