@@ -2,6 +2,7 @@ package android.template.ui.onboarding
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,8 +24,8 @@ fun CompletionScreen(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text(text = "Everything's set")
-        Spacer(modifier = Modifier.height(20.dp))
+        Text(text = "Everything's set!", style = MaterialTheme.typography.headlineLarge)
+        Spacer(modifier = Modifier.height(96.dp))
 
         Button(onClick = {
             viewModel.completeOnboarding()

@@ -34,14 +34,15 @@ fun OnboardingScreen(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         HorizontalPager(
-            count = 3,
+            count = 4,
             state = pagerState,
             modifier = Modifier.weight(1f)
         ) { page ->
             when (page) {
                 0 -> UniversitySelectionScreen(viewModel)
                 1 -> DegreeSelectionScreen(viewModel)
-                2 -> CompletionScreen(navController, viewModel)
+                2 -> FieldSelectionScreen(viewModel)
+                3 -> CompletionScreen(navController, viewModel)
             }
         }
 
@@ -61,7 +62,9 @@ fun OnboardingScreen(
             Row(
                 modifier = Modifier.fillMaxWidth(0.5F),
                 horizontalArrangement = Arrangement.Start) {
-                Spacer(modifier = Modifier.width(12.dp).height(24.dp))
+                Spacer(modifier = Modifier
+                    .width(12.dp)
+                    .height(24.dp))
                 AnimatedVisibility(visible = pagerState.currentPage > 0) {
                     Button(
                         onClick = {
@@ -72,14 +75,18 @@ fun OnboardingScreen(
                         Text(text = "Previous")
                     }
                 }
-                Spacer(modifier = Modifier.width(12.dp).height(24.dp))
+                Spacer(modifier = Modifier
+                    .width(12.dp)
+                    .height(24.dp))
             }
             Row(
                 modifier = Modifier.fillMaxWidth(0.5F),
                 horizontalArrangement = Arrangement.End) {
-                Spacer(modifier = Modifier.width(12.dp).height(24.dp))
+                Spacer(modifier = Modifier
+                    .width(12.dp)
+                    .height(24.dp))
 
-                AnimatedVisibility(visible = pagerState.currentPage < 2) {
+                AnimatedVisibility(visible = pagerState.currentPage < 3) {
                     Button(
                         onClick = {
                             coroutineScope.launch {
@@ -89,7 +96,9 @@ fun OnboardingScreen(
                         Text(text = "Next")
                     }
                 }
-                Spacer(modifier = Modifier.width(12.dp).height(24.dp))
+                Spacer(modifier = Modifier
+                    .width(12.dp)
+                    .height(24.dp))
 
             }
         }
