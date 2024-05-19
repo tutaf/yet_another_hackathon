@@ -24,7 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import android.template.ui.mymodel.MyModelScreen
 import android.template.ui.onboarding.OnboardingScreen
 import android.template.ui.onboarding.OnboardingViewModel
 import androidx.hilt.navigation.compose.hiltViewModel

@@ -1,19 +1,14 @@
-package android.template.ui.mymodel
+package android.template.ui.post
 
-
-
+import android.template.ui.post.PostViewModel
 import android.template.ui.theme.MyApplicationTheme
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.material3.Button
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -32,22 +27,14 @@ import coil.compose.AsyncImage
 import androidx.compose.material3.Text as Text
 
 @Composable
-fun PostScreen(modifier: Modifier = Modifier, viewModel: MyModelViewModel = hiltViewModel()) {
-    val items by viewModel.uiState.collectAsStateWithLifecycle()
-        if (items is MyModelUiState.Success) {
-            PostScreen(
-                items = (items as MyModelUiState.Success).data,
-                onSave = viewModel::addMyModel,
-                modifier = modifier
-            )
-
-    }
+fun PostScreen(modifier: Modifier = Modifier, viewModel: PostViewModel = hiltViewModel()) {
+        PostScreenContent(
+            modifier = modifier
+        )
 }
 
 @Composable
-internal fun PostScreen(
-    items: List<String>,
-    onSave: (name: String) -> Unit,
+fun PostScreenContent(
     modifier: Modifier = Modifier
 ) {
     Column(modifier) {
@@ -100,7 +87,7 @@ internal fun PostScreen(
 @Composable
 private fun DefaultPreview() {
     MyApplicationTheme {
-        PostScreen(listOf("Compose", "Room", "Kotlin"), onSave = {})
+        PostScreenContent()
     }
 }
 
@@ -108,7 +95,7 @@ private fun DefaultPreview() {
 @Composable
 private fun PortraitPreview() {
     MyApplicationTheme {
-        PostScreen(listOf("Compose", "Room", "Kotlin"), onSave = {})
+        PostScreenContent()
     }
 }
 data class Article(
