@@ -17,6 +17,7 @@
 package android.template.ui
 
 import OpportunityApp
+import android.template.ui.feed.FeedScreen
 import android.template.ui.main.MainScreen
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -27,6 +28,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import android.template.ui.onboarding.OnboardingScreen
 import android.template.ui.onboarding.OnboardingViewModel
+import android.util.Log
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
@@ -36,7 +38,11 @@ fun MainNavigation(viewModel: OnboardingViewModel = hiltViewModel()) {
 
     NavHost(navController = navController, startDestination = startDestination) {
         composable("onboarding") { OnboardingScreen(navController = navController) }
-        composable("main") { OpportunityApp() }
+        composable("main") { FeedScreen(
+            modifier = Modifier.padding(16.dp),
+            onClick = {
+                Log.i("tagtag", it.title)
+            }) }
         // TODO: Add more destinations
     }
 }
