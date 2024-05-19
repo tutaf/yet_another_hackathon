@@ -7,6 +7,7 @@ import kotlinx.coroutines.launch
 import android.template.data.RepositoryImpl
 import android.template.data.erasmulApi.models.ApiOpportunity
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 
 class FeedViewModel (
         private val repo: RepositoryImpl
@@ -23,7 +24,9 @@ class FeedViewModel (
     private fun fetchOpportunities() {
         viewModelScope.launch {
             val opportunities = repo.getOpportunities()
-            _opportunitiesUiState.value = opportunities
+            _opportunitiesUiState.update {
+                opportunities
+            }
 
         }
     }
