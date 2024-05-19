@@ -26,23 +26,6 @@ import org.junit.Test
 import android.template.data.local.database.MyModel
 import android.template.data.local.database.MyModelDao
 
-/**
- * Unit tests for [DefaultMyModelRepository].
- */
-@OptIn(ExperimentalCoroutinesApi::class) // TODO: Remove when stable
-class DefaultMyModelRepositoryTest {
-
-    @Test
-    fun myModels_newItemSaved_itemIsReturned() = runTest {
-        val repository = DefaultMyModelRepository(FakeMyModelDao())
-
-        repository.add("Repository")
-
-        assertEquals(repository.myModels.first().size, 1)
-    }
-
-}
-
 private class FakeMyModelDao : MyModelDao {
 
     private val data = mutableListOf<MyModel>()

@@ -41,15 +41,4 @@ class DataModuleImpl : DataModule {
 }
 
 
-val apiOpportunity = ApiOpportunity(
-    id = 1,
-    duration = 60, // duration in minutes
-    title = "Sample Opportunity",
-    degree = "Bachelor's",
-    thumbnailLink = "https://example.com/thumbnail.jpg",
-    country = "Sample Country",
-    category = "Sample Category",
-    content = "Sample opportunity content",
-    deadline = "2024-12-31", // deadline in YYYY-MM-DD format
-    requirements = listOf("Requirement 1", "Requirement 2", "Requirement 3")
-)
+

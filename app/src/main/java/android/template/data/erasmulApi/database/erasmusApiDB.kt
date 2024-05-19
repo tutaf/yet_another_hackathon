@@ -8,7 +8,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Query
 
 private val retrofit = Retrofit.Builder()
     .baseUrl("http://192.168.8.100:5000/")
