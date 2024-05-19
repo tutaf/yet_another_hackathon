@@ -16,9 +16,11 @@
 
 package android.template.ui
 
-import OpportunityApp
 import android.template.ui.feed.FeedScreen
-import android.template.ui.main.MainScreen
+import android.template.ui.feed.FeedScreenRouteDefinition
+import android.template.ui.mymodel.PostRouteDefinition
+import android.template.ui.mymodel.PostScreen
+import android.template.ui.mymodel.PostScreenRoute
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -28,21 +30,24 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import android.template.ui.onboarding.OnboardingScreen
 import android.template.ui.onboarding.OnboardingViewModel
-import android.util.Log
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun MainNavigation(viewModel: OnboardingViewModel = hiltViewModel()) {
     val navController = rememberNavController()
-    val startDestination = if (viewModel.isFirstLaunch) "onboarding" else "main"
+    val startDestination = if (viewModel.isFirstLaunch) "onboarding" else FeedScreenRouteDefinition
 
     NavHost(navController = navController, startDestination = startDestination) {
         composable("onboarding") { OnboardingScreen(navController = navController) }
-        composable("main") { FeedScreen(
+        composable(FeedScreenRouteDefinition) { FeedScreen(
             modifier = Modifier.padding(16.dp),
-            onClick = {
-                Log.i("tagtag", it.title)
-            }) }
-        // TODO: Add more destinations
+            onClick = {opportunity ->
+                navController.navigate(PostScreenRoute(opp=opportunity))
+            })
+        }
+
+        composable(PostRouteDefinition){
+            PostScreen()
+        }
     }
 }
