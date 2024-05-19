@@ -16,8 +16,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.text.font.FontStyle
 
 @Composable
-fun DegreeSelectionScreen(viewModel: OnboardingViewModel = hiltViewModel()) {
-    val degrees = listOf("Bachelor", "Master", "PhD", "Professor")
+fun FieldSelectionScreen(viewModel: OnboardingViewModel = hiltViewModel()) {
+    val fields = listOf("IT", "Medicine", "Law", "Environment")
     val selectedDegree by viewModel.selectedDegree.collectAsState()
 
     Column(
@@ -27,10 +27,10 @@ fun DegreeSelectionScreen(viewModel: OnboardingViewModel = hiltViewModel()) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.Start
     ) {
-        Text(text = "What's your degree?", style = MaterialTheme.typography.headlineMedium)
+        Text(text = "Pick your area of interest", style = MaterialTheme.typography.headlineMedium)
 
         Spacer(modifier = Modifier.height(48.dp))
-        degrees.forEach { degree ->
+        fields.forEach { degree ->
             Row(verticalAlignment = Alignment.CenterVertically) {
                 RadioButton(
                     selected = degree == selectedDegree,

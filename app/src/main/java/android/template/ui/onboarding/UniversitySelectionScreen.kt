@@ -3,6 +3,7 @@ package android.template.ui.onboarding
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -26,8 +27,9 @@ fun UniversitySelectionScreen(viewModel: OnboardingViewModel = hiltViewModel()) 
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start
         ) {
-            Text(text = "Select your University")
-            Spacer(modifier = Modifier.height(20.dp))
+            Text(text = "Select your university", style = MaterialTheme.typography.headlineMedium)
+
+            Spacer(modifier = Modifier.height(96.dp))
 
             universities.forEach { university ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
