@@ -271,7 +271,7 @@ fun OpportunityDetails(opp: ApiOpportunity) {
 
     )
     Column {
-        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(modifier = Modifier.height(6.dp))
 
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp) // Add space of 8.dp between elements
